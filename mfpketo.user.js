@@ -181,6 +181,7 @@ function main() {
         if (!jQuery(this).hasClass('alt')) {
             net_carbs = carbs - fiber;
             if (!isNaN(net_carbs)) {
+                if (net_carbs < 0) net_carbs = 0;
                 tds.eq(net_carbs_i).text(net_carbs);
             } else if (jQuery(this).hasClass("total")) {
                 tds.eq(net_carbs_i).text("0");
@@ -281,12 +282,13 @@ function main() {
             tds.eq(net_carbs_i).text(carbs - fiber);
 
             if ((carbs - fiber) < 0) {
+                tds.eq(net_carbs_i).text(0);
                 // Flag bad data :(
-                tds.each(function () {
-                    jQuery(this).css('background-color', 'pink');
+                //tds.each(function () {
+                //    jQuery(this).css('background-color', 'pink');
 
-                });
-                $('<td style="background: pink">Bad data, negative net carbs!</td>').insertAfter(tds.eq(tds.length - 1));
+                //});
+                //$('<td style="background: pink">Bad data, negative net carbs!</td>').insertAfter(tds.eq(tds.length - 1));
             }
         }
     });
